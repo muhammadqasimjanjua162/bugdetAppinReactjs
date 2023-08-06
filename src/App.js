@@ -30,7 +30,7 @@ function App() {
         yearlyContribution: yearlyContribution,
       });
       // do something with yearlyData ...
-      setResults(yearlyData);
+      //  setResults(yearlyData);
     }
   }
 
@@ -38,10 +38,16 @@ function App() {
     <div>
       <Header />
       <Form onCalculate={calculateHandler} />
+      {!userInput && <p style={{ textAlign: "center" }}>No record to show</p>}
+      {userInput && (
+        <ResultTable
+          data={yearlyData}
+          initialInvestment={userInput["current-savings"]}
+        />
+      )}
 
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
-      <ResultTable />
     </div>
   );
 }

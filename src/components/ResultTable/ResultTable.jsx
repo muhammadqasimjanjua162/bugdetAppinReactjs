@@ -1,9 +1,12 @@
 import React from "react";
+import classes from "../ResultTable/ResultTable.module.css";
 
-const ResultTable = () => {
+const ResultTable = (props) => {
+  console.log(props.initialInvestment, "initila");
+
   return (
     <div>
-      <table className="result">
+      <table className={classes.result}>
         <thead>
           <tr>
             <th>Year</th>
@@ -14,13 +17,22 @@ const ResultTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
+          {props.data.map((yearData) => (
+            <tr>
+              <td>{yearData.year}</td>
+              <td>{yearData.savingsEndOfYear}</td>
+              <td>{yearData.yearlyInterest}</td>
+              <td>
+                {yearData.savingsEndOfYear -
+                  props.initialInvestment -
+                  yearData.yearlyContribution * yearData.year}
+              </td>
+              <td>
+                {props.initialInvestment +
+                  yearData.yearlyContribution * yearData.year}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
